@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-export PWD=$(pwd)
+PWD=$(pwd)
+export PWD
 export BUILD_VERSION="0.1.0"
 export SERVICE_NAME="homecloud"
 export DEPLOYMENT_NAME="homecloud"
