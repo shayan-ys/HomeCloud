@@ -1,0 +1,3 @@
+image: radial/busyboxplus
+imageTag: curl
+mountPoint: /mnt/data/dns

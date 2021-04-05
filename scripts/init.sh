@@ -10,6 +10,7 @@ if k3d cluster get | grep -q "$CLUSTER_NAME"; then
     echo "Cluster already exists... Skipping cluster creation."
 else
     mkdir -p "$MOUNT_PATH/plex"
+    mkdir -p "$MOUNT_PATH/dns/logs"
 
     # Startup our cluster
     k3d cluster create $CLUSTER_NAME \

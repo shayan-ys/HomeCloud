@@ -14,7 +14,8 @@ helm dependency update "$PWD/$SERVICE_NAME"
 echo "Deploying application..."
 
 helm upgrade "$DEPLOYMENT_NAME" "$PWD/$SERVICE_NAME" \
-    --install
+    --install \
+    --values $PWD/$SERVICE_NAME/secret.yaml
 
 # echo "Waiting for traefik pod to be ready..."
 

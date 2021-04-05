@@ -1,4 +1,5 @@
 bin/
-cluster/mount/plex/*
+cluster/mount/*
 *Chart.lock
 */charts/*.tgz
+homecloud/secret.yaml

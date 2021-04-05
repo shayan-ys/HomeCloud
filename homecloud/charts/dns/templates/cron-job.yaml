@@ -1,0 +1,26 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Chart.Name }}-cronjob
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: {{ .Chart.Name }}-image
+            image: {{ .Values.image }}:{{ .Values.imageTag | default "latest" }}
+            imagePullPolicy: IfNotPresent
+            command:
+            - /bin/sh
+            - -c
+            - echo url="https://www.duckdns.org/update?domains={{ .Values.secret.domain }}&token={{ .Values.secret.token }}&ip=" | curl -k -o /dnslog/duck.log -K -
+            volumeMounts:
+              - name: dnslog
+                mountPath: /dnslog
+          volumes:
+            - name: dnslog
+              hostPath:
+                path: "{{ .Values.mountPoint }}/logs"
+          restartPolicy: OnFailure
