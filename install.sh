@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $PWD/scripts/common.sh
+source $(pwd)/scripts/common.sh
 
 CLUSTER_NAME="$SERVICE_NAME"
 
@@ -19,3 +19,5 @@ else
 
     kubectl cluster-info --context "$KUBECTL_CONTEXT";
 fi
+
+source $PWD/scripts/deploy.sh
