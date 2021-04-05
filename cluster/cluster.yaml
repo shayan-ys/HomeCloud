@@ -1,0 +1,19 @@
+apiVersion: k3d.io/v1alpha2
+kind: Simple
+name: homecloud
+kubeAPI:
+  hostIP: "127.0.0.1"
+  hostPort: "6443"
+ports:
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+options:
+  k3d: # k3d runtime settings
+    timeout: "60s"
+  k3s:
+    extraServerArgs: # additional arguments passed to the `k3s server` command; same as `--k3s-server-arg`
+      - --no-deploy=traefik

@@ -1,0 +1,4 @@
+bin/
+cluster/mount/plex/*
+*Chart.lock
+*/charts/*.tgz

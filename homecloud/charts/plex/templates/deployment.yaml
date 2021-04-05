@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-deployment
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}-app
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}-image
+        image: {{ .Values.image }}:{{ .Values.imageTag | default "latest" }}
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        volumeMounts:
+        - name: media-mount
+          mountPath: "/media"
+          readOnly: true
+        - name: config-mount
+          mountPath: "/config"
+        - name: transcode-mount
+          mountPath: "/transcode"
+      volumes:
+      - name: media-mount
+        hostPath:
+          path: "{{ .Values.mountPoint }}/media"
+      - name: config-mount
+        hostPath:
+          path: "{{ .Values.mountPoint }}/config"
+      - name: transcode-mount
+        persistentVolumeClaim:
+          claimName: {{ .Chart.Name }}-transcode-pvc

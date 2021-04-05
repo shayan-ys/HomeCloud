@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+export PWD=$(pwd)
+export BUILD_VERSION="0.1.0"
+export SERVICE_NAME="homecloud"
+export DEPLOYMENT_NAME="homecloud"
+export PROVIDER="k3d"
+export KUBECTL_CONTEXT="$PROVIDER-$SERVICE_NAME"
+export MOUNT_PATH="$PWD/cluster/mount"
+export CLUSTER_CONFIG_FILE="$PWD/cluster/cluster.yaml"
