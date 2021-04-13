@@ -4,6 +4,7 @@ metadata:
   name: {{ .Chart.Name }}-service
 spec:
   ports:
-    - port: {{ .Values.port | default .Values.containerPort }}
+    - port: {{ .Values.port }}
+      targetPort: {{ .Values.containerPort }}
   selector:
     app: {{ .Chart.Name }}-app

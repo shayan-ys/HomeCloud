@@ -8,5 +8,8 @@ dependencies:
   - name: nitter
     version: "0.1.0"
   - name: traefik
-    version: "9.18.1"
+    version: "9.18.2"
     repository: "https://helm.traefik.io/traefik"
+#  - name: kubernetes-dashboard
+#    version: "4.0.3"
+#    repository: "https://kubernetes.github.io/dashboard/"

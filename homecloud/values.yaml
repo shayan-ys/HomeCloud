@@ -1,3 +1,43 @@
+dns:
+  secret:
+    domain:
+    token:
+
+plex:
+  port: 1001
+  ingress:
+    host: localhost
+    path: /plex
+
 nitter:
   theme: Twitter
   hlsPlayback: true
+  port: 1002
+  ingress:
+    host: localhost
+    path: /
+
+traefik:
+#  ssl:
+#    insecureSkipVerify: "true"
+
+  api:
+    dashboard: true
+
+  additionalArguments:
+    - "--log.level=DEBUG"
+    - "--entrypoints.websecure.http.tls"
+    - "--providers.kubernetesIngress.ingressClass=traefik-cert-manager"
+    - "--ping"
+    - "--metrics.prometheus"
+
+global:
+  certIssuer:
+    name: letsencrypt
+    email: nil
+    server: nil
+
+  kubeDashboard:
+    name: kube-dashboard
+    host: nil
+    port: 443

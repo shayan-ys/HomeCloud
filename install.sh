@@ -18,6 +18,15 @@ else
         --volume "$MOUNT_PATH:/mnt/data"
 
     kubectl cluster-info --context "$KUBECTL_CONTEXT";
+
+    helm repo add jetstack https://charts.jetstack.io
+
+    echo "Updating dependencies..."
+    helm repo update
+    helm dependency update "$PWD/$SERVICE_NAME"
+
+    echo "Install prerequisite helm charts"
+    source "$PWD"/scripts/install-cert-manager.sh
 fi
 
 source "$PWD"/scripts/deploy.sh

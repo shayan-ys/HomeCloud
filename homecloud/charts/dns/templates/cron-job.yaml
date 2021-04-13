@@ -15,10 +15,18 @@ spec:
             command:
             - /bin/sh
             - -c
-            - echo url="https://www.duckdns.org/update?domains={{ .Values.secret.domain }}&token={{ .Values.secret.token }}&ip=" | curl -k -o /dnslog/duck.log -K -
+            - echo url="https://www.duckdns.org/update?domains={{ .Values.secret.domain }}&token={{ .Values.secret.token }}&ip=" | curl -k -o /dnslog/duck.log -K -;
+              if [ "$(cat '/dnslog/duck.log')" == "OK" ]; then touch /dnslog/healthy; else rm -rf /dnslog/healthy; fi
             volumeMounts:
               - name: dnslog
                 mountPath: /dnslog
+            livenessProbe:
+              exec:
+                command:
+                  - cat
+                  - /dnslog/healthy
+              initialDelaySeconds: 300
+              periodSeconds: 300
           volumes:
             - name: dnslog
               hostPath:
