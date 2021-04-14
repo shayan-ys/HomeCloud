@@ -8,8 +8,7 @@ NAMESPACE="cert-manager"
 
 echo "Installing cert-manager Helm chart..."
 
-helm upgrade cert-manager jetstack/cert-manager \
-  --install \
+helm install cert-manager jetstack/cert-manager \
   --namespace $NAMESPACE \
   --create-namespace \
   --version v1.3.0 \

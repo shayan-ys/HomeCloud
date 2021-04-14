@@ -18,8 +18,8 @@ nitter:
     path: /
 
 traefik:
-#  ssl:
-#    insecureSkipVerify: "true"
+  ssl:
+    insecureSkipVerify: "true"
 
   api:
     dashboard: true
