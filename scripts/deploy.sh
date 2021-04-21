@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $PWD/scripts/common.sh
+source "$(pwd)"/scripts/common.sh
 
 set -e
 
@@ -11,4 +11,4 @@ echo "Deploying application..."
 
 helm upgrade "$DEPLOYMENT_NAME" "$PWD/$SERVICE_NAME" \
     --install \
-    --values "$PWD"/"$SERVICE_NAME"/secret.yaml
+    --values "$PWD/$SERVICE_NAME/secret.yaml"

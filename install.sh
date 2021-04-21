@@ -19,14 +19,29 @@ else
 
     kubectl cluster-info --context "$KUBECTL_CONTEXT";
 
-    helm repo add jetstack https://charts.jetstack.io
+    # echo "Updating dependencies..."
+    # helm repo update
+    # helm dependency update "$PWD/$SERVICE_NAME"
 
-    echo "Updating dependencies..."
-    helm repo update
-    helm dependency update "$PWD/$SERVICE_NAME"
+    echo "Deploy ingress-nginx..."
+    kubectl apply -f "https://github.com/kubernetes/ingress-nginx/blob/ed5aee7659bdd9a5f018ef56ddd2de664b2d96e7/deploy/static/provider/baremetal/deploy.yaml"
 
-    echo "Install prerequisite helm charts"
-    source "$PWD"/scripts/install-cert-manager.sh
+    while : ; do
+      echo "Wait for the ingress-controller to become available"
+      kubectl wait --namespace ingress-nginx \
+        --for=condition=ready pod \
+        --selector=app.kubernetes.io/component=controller \
+        --timeout=2m \
+        && break
+
+      echo "Ingress-controller not available trying again in 3 seconds"
+      sleep 3
+    done
+
+    echo "Patch nginx controller"
+    kubectl patch deployment ingress-nginx-controller \
+      --namespace ingress-nginx \
+      --patch "$(cat "$NGINX_PATCH")"
 fi
 
 source "$PWD"/scripts/deploy.sh
