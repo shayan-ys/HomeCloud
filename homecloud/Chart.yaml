@@ -11,6 +11,8 @@ dependencies:
     version: "0.1.0"
   - name: plex
     version: "0.1.0"
+  - name: whoami
+    version: "0.1.0"
 #  - name: kubernetes-dashboard
 #    version: "4.0.3"
 #    repository: "https://kubernetes.github.io/dashboard/"

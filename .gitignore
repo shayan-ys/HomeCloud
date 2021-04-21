@@ -1,4 +1,3 @@
-bin/
 cluster/mount/*
 *Chart.lock
 */charts/*.tgz
