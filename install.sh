@@ -24,7 +24,7 @@ else
     # helm dependency update "$PWD/$SERVICE_NAME"
 
     echo "Deploy ingress-nginx..."
-    kubectl apply -f "https://github.com/kubernetes/ingress-nginx/blob/ed5aee7659bdd9a5f018ef56ddd2de664b2d96e7/deploy/static/provider/baremetal/deploy.yaml"
+    kubectl apply -f "$NGINX_DEPLOYMENT"
 
     while : ; do
       echo "Wait for the ingress-controller to become available"
