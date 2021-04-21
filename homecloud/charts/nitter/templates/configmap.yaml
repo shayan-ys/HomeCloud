@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Chart.Name }}-configmap
-data:
-  nitter.conf: |
-    [Preferences]
-    theme = {{ .Values.theme | default "Nitter" | quote }}
-    hlsPlayback = {{ .Values.hlsPlayback | default "false" }}

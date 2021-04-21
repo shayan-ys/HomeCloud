@@ -19,12 +19,12 @@ else
 
     kubectl cluster-info --context "$KUBECTL_CONTEXT";
 
-    # echo "Updating dependencies..."
-    # helm repo update
-    # helm dependency update "$PWD/$SERVICE_NAME"
-
     echo "Deploy ingress-nginx..."
-    kubectl apply -f "$NGINX_DEPLOYMENT"
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/baremetal/deploy.yaml
+
+    echo "Updating dependencies..."
+    helm repo update
+    helm dependency update "$PWD/$SERVICE_NAME"
 
     while : ; do
       echo "Wait for the ingress-controller to become available"

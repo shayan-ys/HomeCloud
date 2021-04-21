@@ -1,3 +1,0 @@
-containerPort: 32400
-image: plexinc/pms-docker
-mountPoint: /mnt/data/plex
